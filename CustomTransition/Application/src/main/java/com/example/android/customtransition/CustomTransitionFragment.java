@@ -20,7 +20,6 @@ import com.example.android.common.logger.Log;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.transition.Scene;
 import android.transition.Transition;
 import android.transition.TransitionManager;
@@ -28,6 +27,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.fragment.app.Fragment;
 
 public class CustomTransitionFragment extends Fragment implements View.OnClickListener {
 
@@ -50,27 +51,42 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_custom_transition, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        Context context = getActivity();
-        FrameLayout container = (FrameLayout) view.findViewById(R.id.container);
+        View view = inflater.inflate(R.layout.fragment_custom_transition, container, false);
+        ViewGroup sceneRoot = (FrameLayout) view.findViewById(R.id.scene_root);
         view.findViewById(R.id.show_next_scene).setOnClickListener(this);
         if (null != savedInstanceState) {
             mCurrentScene = savedInstanceState.getInt(STATE_CURRENT_SCENE);
         }
+
         // We set up the Scenes here.
         mScenes = new Scene[] {
-                Scene.getSceneForLayout(container, R.layout.scene1, context),
-                Scene.getSceneForLayout(container, R.layout.scene2, context),
-                Scene.getSceneForLayout(container, R.layout.scene3, context),
+                new Scene( sceneRoot, (ViewGroup) sceneRoot.findViewById(R.id.container) ),
+                Scene.getSceneForLayout(sceneRoot, R.layout.scene2, getContext()),
+                Scene.getSceneForLayout(sceneRoot, R.layout.scene3, getContext())
         };
-        // This is the custom Transition.
+
+        // This is the custom Transition
+        /**
+         * 아래 Cutom Transition을 사용하면 기본 Transition은 사용이 불가능해진다!
+         */
         mTransition = new ChangeColor();
         // Show the initial Scene.
         TransitionManager.go(mScenes[mCurrentScene % mScenes.length]);
+        return view;
+    }
+
+    /**
+     * 기존 코드는 onViewCreated에서 mScenes를 생성했다
+     * 이떄는 애니메이션이 제대로 동작하지 않아서 onCreateView에서 view가 생성되기 전에
+     * Scene를 생성했더니 문제없이 동작한다.
+     * 애니메이션은 색깔은 자동으로 되지 않지만,
+     * Scale, 위치 등의 property는 자동으로 애니메이션이 되며
+     * LayoutParam에 상관없고 id값만 동일하게 맞춰주면 된다!!
+     * @param view
+     * @param savedInstanceState
+     */
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
     }
 
     @Override
@@ -86,7 +102,7 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
                 mCurrentScene = (mCurrentScene + 1) % mScenes.length;
                 Log.i(TAG, "Transitioning to scene #" + mCurrentScene);
                 // Pass the custom Transition as second argument for TransitionManager.go
-                TransitionManager.go(mScenes[mCurrentScene], mTransition);
+                TransitionManager.go(mScenes[mCurrentScene],mTransition);
                 break;
             }
         }
