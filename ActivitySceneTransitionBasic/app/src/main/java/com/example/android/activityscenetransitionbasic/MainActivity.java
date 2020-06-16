@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
              * method.
              */
             @SuppressWarnings("unchecked")
+            ActivityOptionsCompat.makeSceneTransitionAnimation
             ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     MainActivity.this,
 

@@ -182,6 +182,7 @@ public class StreetViewFragment extends Fragment implements BackPressAware {
 
     /**
      * Reveals the contents of this fragment using a circular reveal animation.
+     * //TODO-CHECK AnimatorSet
      */
     private void revealPanorama() {
         //noinspection ConstantConditions

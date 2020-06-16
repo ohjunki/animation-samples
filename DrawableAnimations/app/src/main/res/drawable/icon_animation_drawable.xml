@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/a001_conveyor" android:duration="200"/>
+    <item android:drawable="@drawable/a002_coal" android:duration="200"/>
+    <item android:drawable="@drawable/a003_cosmetic" android:duration="200"/>
+    <item android:drawable="@drawable/a004_chemicals" android:duration="200"/>
+    <item android:drawable="@drawable/a005_screwdriver" android:duration="200"/>
+    <item android:drawable="@drawable/a006_pipe" android:duration="200"/>
+    <item android:drawable="@drawable/a007_warehouse" android:duration="200"/>
+    <item android:drawable="@drawable/a008_welder" android:duration="200"/>
+    <item android:drawable="@drawable/a009_refinery" android:duration="200"/>
+</animation-list>

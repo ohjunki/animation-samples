@@ -295,6 +295,7 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
      */
     private void swapEmptyWithContentView(boolean animate) {
         if (animate) {
+            //TODO-CHECK ViewPropertyAnimator
             mEmptyView.animate()
                     .alpha(0f)
                     .setInterpolator(INTERPOLATOR)

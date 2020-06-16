@@ -16,6 +16,10 @@
 
 package com.example.android.unsplash;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.PropertyValuesHolder;
+import android.animation.StateListAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,9 +28,13 @@ import android.transition.Slide;
 import android.transition.TransitionSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.Toolbar;
 
+import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.android.unsplash.data.model.Photo;
