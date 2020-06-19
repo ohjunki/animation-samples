@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.android.unsplash.DLog;
 import com.example.android.unsplash.IntentUtil;
 import com.example.android.unsplash.databinding.DetailViewBinding;
 import com.example.android.unsplash.databinding.PhotoItemBinding;
@@ -35,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Text의 경우는 Size Transition이 안되기 떄문에 이를 해주기 위해서 아래처럼 Callback에서 조정을 해준다.
+ */
 public class DetailSharedElementEnterCallback extends SharedElementCallback {
 
     private final Intent intent;
@@ -52,6 +56,10 @@ public class DetailSharedElementEnterCallback extends SharedElementCallback {
     public void onSharedElementStart(List<String> sharedElementNames,
                                      List<View> sharedElements,
                                      List<View> sharedElementSnapshots) {
+        DLog.ee( "size="+sharedElementNames.size()+" , "+sharedElements.size()+" , "+sharedElementSnapshots.size());
+        for (String s : sharedElementNames) {
+            DLog.ee(s);
+        }
         TextView author = getAuthor();
         targetTextSize = author.getTextSize();
         targetTextColors = author.getTextColors();
@@ -73,6 +81,7 @@ public class DetailSharedElementEnterCallback extends SharedElementCallback {
     public void onSharedElementEnd(List<String> sharedElementNames,
                                    List<View> sharedElements,
                                    List<View> sharedElementSnapshots) {
+        DLog.ee();
         TextView author = getAuthor();
         author.setTextSize(TypedValue.COMPLEX_UNIT_PX, targetTextSize);
         if (targetTextColors != null) {
@@ -89,6 +98,7 @@ public class DetailSharedElementEnterCallback extends SharedElementCallback {
 
     @Override
     public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
+        DLog.ee();
         removeObsoleteElements(names, sharedElements, mapObsoleteElements(names));
         mapSharedElement(names, sharedElements, getAuthor());
         mapSharedElement(names, sharedElements, getPhoto());

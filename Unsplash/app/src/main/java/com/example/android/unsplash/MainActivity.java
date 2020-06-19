@@ -121,7 +121,9 @@ public class MainActivity extends Activity {
                 PhotoItemBinding binding = ((PhotoViewHolder) holder).getBinding();
                 final Intent intent = getDetailActivityStartIntent(MainActivity.this,
                         relevantPhotos, position, binding);
-                final ActivityOptions activityOptions = getActivityOptions(binding);
+                Pair authorPair = Pair.create(binding.author, binding.author.getTransitionName());
+                Pair photoPair = Pair.create(binding.photo, binding.photo.getTransitionName());
+                final ActivityOptions activityOptions = SharedUtils.getActivityOptions(MainActivity.this, authorPair, photoPair);
 
                 MainActivity.this.startActivityForResult(intent, IntentUtil.REQUEST_CODE,
                         activityOptions.toBundle());
@@ -138,6 +140,7 @@ public class MainActivity extends Activity {
 
     @Override
     public void onActivityReenter(int resultCode, Intent data) {
+        DLog.ee();
         postponeEnterTransition();
         // Start the postponed transition when the recycler view is ready to be drawn.
         grid.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -207,24 +210,4 @@ public class MainActivity extends Activity {
         return intent;
     }
 
-    private ActivityOptions getActivityOptions(PhotoItemBinding binding) {
-        Pair authorPair = Pair.create(binding.author, binding.author.getTransitionName());
-        Pair photoPair = Pair.create(binding.photo, binding.photo.getTransitionName());
-        View decorView = getWindow().getDecorView();
-        View statusBackground = decorView.findViewById(android.R.id.statusBarBackground);
-        View navBackground = decorView.findViewById(android.R.id.navigationBarBackground);
-        Pair statusPair = Pair.create(statusBackground,
-                statusBackground.getTransitionName());
-
-        final ActivityOptions options;
-        if (navBackground == null) {
-            options = ActivityOptions.makeSceneTransitionAnimation(this,
-                    authorPair, photoPair, statusPair);
-        } else {
-            Pair navPair = Pair.create(navBackground, navBackground.getTransitionName());
-            options = ActivityOptions.makeSceneTransitionAnimation(this,
-                    authorPair, photoPair, statusPair, navPair);
-        }
-        return options;
-    }
 }
