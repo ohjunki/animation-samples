@@ -25,9 +25,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/color"
             android:layout_above="@+id/button"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:layout_marginLeft="@dimen/margin_medium"/>
+            android:layout_marginLeft="40dp"/>
     <Button
             android:id="@+id/button"
             style="?android:attr/buttonStyleSmall"

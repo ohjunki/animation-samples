@@ -4,13 +4,9 @@ project(':CustomTransition').projectDir = new File('CustomTransition/Application
 project(':ActivitySceneTransitionBasic').projectDir = new File('ActivitySceneTransitionBasic/app')
 project(':BasicTransition').projectDir = new File('BasicTransition/Application')
 
-include ':DrawableAnimations', ':GridToPager', ':Interpolator'
+include ':DrawableAnimations'
 project(':DrawableAnimations').projectDir = new File('DrawableAnimations/app')
-project(':GridToPager').projectDir = new File('GridToPager/app')
-project(':Interpolator').projectDir = new File('Interpolator/Application')
 
-include ':Motion', ':OurStreets', ':RevealEffectBasic', ':Unsplash'
+include ':Motion', ':Unsplash'
 project(':Motion').projectDir = new File('Motion/app')
-project(':OurStreets').projectDir = new File('OurStreets/app')
-project(':RevealEffectBasic').projectDir = new File('RevealEffectBasic/Application')
 project(':Unsplash').projectDir = new File('Unsplash/app')

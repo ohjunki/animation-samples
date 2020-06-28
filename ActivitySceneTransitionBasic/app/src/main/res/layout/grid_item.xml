@@ -18,7 +18,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:transitionGroup="true">
 
     <com.example.android.activityscenetransitionbasic.SquareFrameLayout
         android:layout_width="match_parent"
@@ -29,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@null"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:transitionName="detail:header:image"/>
 
     </com.example.android.activityscenetransitionbasic.SquareFrameLayout>
 
@@ -41,6 +43,7 @@
         android:maxLines="1"
         android:padding="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:theme="@style/Theme.AppCompat" />
+        android:theme="@style/Theme.AppCompat"
+        android:transitionName="detail:header:title"/>
 
 </LinearLayout>

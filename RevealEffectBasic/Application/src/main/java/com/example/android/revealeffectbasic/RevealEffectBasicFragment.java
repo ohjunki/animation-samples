@@ -17,7 +17,8 @@ package com.example.android.revealeffectbasic;
 
 import android.animation.Animator;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,8 +59,8 @@ public class RevealEffectBasicFragment extends Fragment {
                 // the top left corner until the whole view is covered.
                 Animator circularReveal = ViewAnimationUtils.createCircularReveal(
                         shape,
-                        0,
-                        0,
+                        (int) (shape.getWidth()/2),
+                        (int) (shape.getHeight()/2),
                         0,
                         (float) Math.hypot(shape.getWidth(), shape.getHeight()));
                 circularReveal.setInterpolator(new AccelerateDecelerateInterpolator());

@@ -33,6 +33,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 
+import com.example.android.common.logger.Log;
+
 public class ChangeColor extends Transition {
 
     /** Key to store a color value in TransitionValues object */
@@ -134,6 +136,8 @@ public class ChangeColor extends Transition {
 //                            view.setTranslationX( (sX-eX)* animation.getAnimatedFraction() );
 //                            view.setScaleX( (sWidth/(float)eWidth) -  ( sWidth/(float)eWidth -1 ) * animation.getAnimatedFraction());
 //                            view.setScaleY( (sHeidth/(float)eHeidth) -  ( sHeidth/(float)eHeidth -1 ) * animation.getAnimatedFraction());
+                            Log.e("@@ANi", "fraction="+animation.getAnimatedFraction() );
+                            Log.e("@@ANi", "fraction="+animation.getCurrentPlayTime() );
                             view.setBackgroundColor((Integer) value);
                         }
                     }

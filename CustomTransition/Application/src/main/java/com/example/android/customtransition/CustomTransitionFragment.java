@@ -20,9 +20,11 @@ import com.example.android.common.logger.Log;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.transition.AutoTransition;
 import android.transition.Scene;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,9 +71,18 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
         /**
          * 아래 Cutom Transition을 사용하면 기본 Transition은 사용이 불가능해진다!
          */
-        mTransition = new ChangeColor();
+//        mTransition = new ChangeColor();
         // Show the initial Scene.
         TransitionManager.go(mScenes[mCurrentScene % mScenes.length]);
+
+        TransitionSet set = new TransitionSet();
+        set.addTransition(new ChangeColor());
+        set.addTransition(new AutoTransition());
+
+        set.excludeTarget( R.id.view_1, true);
+//        set.removeTarget( R.id.view_2);
+//        set.removeTarget( R.id.view_3);
+        mTransition = set;
         return view;
     }
 

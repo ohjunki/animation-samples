@@ -16,6 +16,7 @@
 
 package com.example.android.unsplash;
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -67,16 +68,24 @@ public class MainActivity extends Activity {
     private ProgressBar empty;
     private ArrayList<Photo> relevantPhotos;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         postponeEnterTransition();
         // Listener to reset shared element exit transition callbacks.
         getWindow().getSharedElementExitTransition().addListener(sharedExitListener);
 
         grid = (RecyclerView) findViewById(R.id.image_grid);
         empty = (ProgressBar) findViewById(android.R.id.empty);
+
+        LayoutTransition transition = new LayoutTransition();
+        transition.enableTransitionType(LayoutTransition.APPEARING);
+        transition.setDuration(300);
+        grid.setLayoutTransition(transition);
 
         setupRecyclerView();
 
@@ -123,7 +132,7 @@ public class MainActivity extends Activity {
                         relevantPhotos, position, binding);
                 Pair authorPair = Pair.create(binding.author, binding.author.getTransitionName());
                 Pair photoPair = Pair.create(binding.photo, binding.photo.getTransitionName());
-                final ActivityOptions activityOptions = SharedUtils.getActivityOptions(MainActivity.this, authorPair, photoPair);
+                final ActivityOptions activityOptions = AnimationUtils.getActivityOptions(MainActivity.this, authorPair, photoPair);
 
                 MainActivity.this.startActivityForResult(intent, IntentUtil.REQUEST_CODE,
                         activityOptions.toBundle());
@@ -166,7 +175,7 @@ public class MainActivity extends Activity {
             return;
         }
         DetailSharedElementEnterCallback callback =
-                new DetailSharedElementEnterCallback(getIntent());
+                new DetailSharedElementEnterCallback(getIntent(), "Main");
         callback.setBinding(holder.getBinding());
         setExitSharedElementCallback(callback);
     }

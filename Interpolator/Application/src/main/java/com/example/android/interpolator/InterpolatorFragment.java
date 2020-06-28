@@ -20,7 +20,8 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.Path;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;

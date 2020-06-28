@@ -22,10 +22,8 @@
 
     <!-- changeBounds is used for the TextViews which are shared -->
     <changeBounds />
-
     <!-- changeImageTransform is used for the ImageViews which are shared -->
     <changeImageTransform />
 
 </transitionSet>
-
 

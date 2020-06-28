@@ -61,8 +61,7 @@ public class DetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_detail);
 
-        postponeEnterTransition();
-
+//        postponeEnterTransition();
         TransitionSet transitions = new TransitionSet();
         Slide slide = new Slide(Gravity.BOTTOM);
         slide.setInterpolator(AnimationUtils.loadInterpolator(this,
@@ -73,7 +72,7 @@ public class DetailActivity extends Activity {
         getWindow().setEnterTransition(transitions);
 
         Intent intent = getIntent();
-        sharedElementCallback = new DetailSharedElementEnterCallback(intent);
+        sharedElementCallback = new DetailSharedElementEnterCallback(intent,"Detail");
         setEnterSharedElementCallback(sharedElementCallback);
         initialItem = intent.getIntExtra(IntentUtil.SELECTED_ITEM_POSITION, 0);
         setUpViewPager(intent.<Photo>getParcelableArrayListExtra(IntentUtil.PHOTO));
@@ -95,7 +94,7 @@ public class DetailActivity extends Activity {
                                        int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (viewPager.getChildCount() > 0) {
                     viewPager.removeOnLayoutChangeListener(this);
-                    startPostponedEnterTransition();
+//                    startPostponedEnterTransition();
                 }
             }
         });

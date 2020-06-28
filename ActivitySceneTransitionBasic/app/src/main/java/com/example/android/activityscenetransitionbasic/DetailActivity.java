@@ -19,6 +19,7 @@ package com.example.android.activityscenetransitionbasic;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Transition;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,11 +54,20 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details);
 
+        postponeEnterTransition();
         // Retrieve the correct Item instance, using the ID provided in the Intent
         mItem = Item.getItem(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
 
         mHeaderImageView = findViewById(R.id.imageview_header);
-        mHeaderTitle = findViewById(R.id.textview_title);
+        mHeaderImageView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    mHeaderImageView.getViewTreeObserver().removeOnPreDrawListener(this);
+                    startPostponedEnterTransition();
+                    return false;
+                }
+        });
+                mHeaderTitle = findViewById(R.id.textview_title);
 
         // BEGIN_INCLUDE(detail_set_view_name)
         /*

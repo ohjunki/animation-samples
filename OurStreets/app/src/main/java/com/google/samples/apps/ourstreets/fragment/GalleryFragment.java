@@ -38,6 +38,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.animation.AnimationSet;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -69,7 +70,7 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
     private List<Gallery> mGalleries;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView mRecyclerView;
-    private View mEmptyView;
+    private View mEmptyView, emptyLL;
     private View mGalleryContent;
 
     private boolean mAnimateViewSwap;
@@ -110,6 +111,7 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ViewCompat.requestApplyInsets(view);
         mEmptyView = view.findViewById(R.id.progress);
+        emptyLL = view.findViewById(R.id.empty_ll);
         mGalleryContent = view.findViewById(R.id.gallery_content);
         initRecyclerView(view);
         mAnimateViewSwap = savedInstanceState == null && mGalleries == null;
@@ -265,7 +267,8 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
         AnimatorSet animatorSet = new AnimatorSet();
         FrameLayout targetView = ((FrameLayout) getView());
         //noinspection ConstantConditions
-        animatorSet.play(createCircularReveal(targetView)).with(createColorChange(targetView));
+        swapEmptyWithContentView( animatorSet.play(createCircularReveal(targetView)) );
+        animatorSet.setDuration(3000);
         animatorSet.start();
     }
 
@@ -276,7 +279,7 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
         circularReveal.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
-                swapEmptyWithContentView(true);
+//                swapEmptyWithContentView(true);
             }
         });
         return circularReveal;
@@ -298,6 +301,7 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
             //TODO-CHECK ViewPropertyAnimator
             mEmptyView.animate()
                     .alpha(0f)
+                    .setDuration(3000)
                     .setInterpolator(INTERPOLATOR)
                     .withEndAction(new Runnable() {
                         @Override
@@ -309,6 +313,7 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
             mGalleryContent.setVisibility(View.VISIBLE);
             mGalleryContent.animate()
                     .alpha(1f)
+                    .setDuration(5000)
                     .setInterpolator(INTERPOLATOR)
                     .start();
         } else {
@@ -316,6 +321,43 @@ public class GalleryFragment extends Fragment implements DataView<Gallery> {
             mGalleryContent.setVisibility(View.VISIBLE);
         }
     }
+
+
+    private AnimatorSet.Builder swapEmptyWithContentView(AnimatorSet.Builder builder) {
+        ObjectAnimator obj = ObjectAnimator.ofFloat(mEmptyView, View.ALPHA, 1,0);
+        obj.setInterpolator(INTERPOLATOR);
+        obj.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+        });
+        Animator obj3 = ViewUtils.createCircularConceal(ViewUtils.getCenterForView(emptyLL), 0,
+                emptyLL, INTERPOLATOR).setDuration(500);
+        obj3.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                emptyLL.setVisibility(View.GONE);
+                mEmptyView.setVisibility(View.GONE);
+            }
+        });
+
+        mGalleryContent.setAlpha(0f);
+        ObjectAnimator obj2 = ObjectAnimator.ofFloat(mGalleryContent, View.ALPHA, 0,1);
+        obj2.setInterpolator(INTERPOLATOR);
+        obj2.setDuration(500);
+        obj2.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                mGalleryContent.setVisibility(View.VISIBLE);
+            }
+        });
+
+        return builder.with(obj).with(obj2).with(obj3);
+    }
+
 
     private void setupAndInflate(ViewStub failedStub) {
         failedStub.setOnInflateListener(new ViewStub.OnInflateListener() {

@@ -22,6 +22,11 @@
     tools:context="com.example.android.customtransition.CustomTransitionFragment">
 
     <Button
+        android:id="@+id/test1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testBtn"/>
+    <Button
         android:id="@+id/show_next_scene"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -46,7 +46,6 @@
                     android:transitionGroup="false">
 
                 <TextView
-                        android:id="@+id/author"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingEnd="@dimen/padding_normal"
@@ -58,7 +57,8 @@
                         android:transitionName="@{@string/transition_author + data.id}" />
 
                 <TextView
-                        android:layout_width="match_parent"
+                    android:id="@+id/author"
+                    android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingMultiplier="1.26315789474"
                         android:paddingEnd="@dimen/padding_normal"
@@ -66,7 +66,8 @@
                         android:paddingTop="@dimen/padding_normal"
                         android:text="@string/lorum_ipsum"
                         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-                        android:textColor="?android:textColorSecondary" />
+                        android:textColor="?android:textColorSecondary"
+                    android:transitionName="@{@string/transition_author + data.id}"  />
 
             </LinearLayout>
 

@@ -16,7 +16,14 @@
 
 package com.example.android.basictransition;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
+import android.graphics.Path;
 import android.os.Bundle;
+
+import androidx.annotation.InterpolatorRes;
 import androidx.fragment.app.Fragment;
 import android.transition.Scene;
 import android.transition.TransitionInflater;
@@ -24,9 +31,13 @@ import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
+import android.view.animation.PathInterpolator;
 import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 
 public class BasicTransitionFragment extends Fragment
         implements RadioGroup.OnCheckedChangeListener {
@@ -60,7 +71,7 @@ public class BasicTransitionFragment extends Fragment
 
         // BEGIN_INCLUDE(instantiation_from_view)
         // A Scene can be instantiated from a live view hierarchy.
-        mScene1 = new Scene(mSceneRoot, (ViewGroup) mSceneRoot.findViewById(R.id.container));
+        mScene1 = Scene.getSceneForLayout(mSceneRoot, R.layout.scene1, getActivity());//new Scene(mSceneRoot, (ViewGroup) mSceneRoot.findViewById(R.id.container));
         // END_INCLUDE(instantiation_from_view)
 
         // BEGIN_INCLUDE(instantiation_from_resource)
@@ -93,12 +104,28 @@ public class BasicTransitionFragment extends Fragment
             }
             case R.id.select_scene_2: {
                 TransitionManager.go(mScene2);
+                mScene2.getSceneRoot().setOnClickListener(v-> {
+                    ObjectAnimator ani = ObjectAnimator.ofFloat(v, "translationX", 100f);
+                    ani.setInterpolator( new FastOutLinearInInterpolator());
+                    ani.start();
+                });
                 break;
             }
             case R.id.select_scene_3: {
                 // BEGIN_INCLUDE(transition_custom)
                 // You can also start a transition with a custom TransitionManager.
                 mTransitionManagerForScene3.transitionTo(mScene3);
+                PathInterpolator pathInterpolator = (PathInterpolator) AnimationUtils.loadInterpolator(getContext(), R.anim.path_ani);
+                mScene3.getSceneRoot().setOnClickListener(v->{
+                    ObjectAnimator ani = ObjectAnimator.ofFloat(v, "translationX");
+                        ani.setInterpolator(pathInterpolator);
+                        ani.start();
+
+//                    mScene3.getSceneRoot().animate()
+//                            .alpha(mScene3.getSceneRoot().getAlpha()==0?1:0)
+//                            .setDuration(300);
+                });
+
                 // END_INCLUDE(transition_custom)
                 break;
             }

@@ -29,7 +29,17 @@
             android:indeterminateTint="@color/placeholder"
             android:indeterminateTintMode="src_in" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aajwfelajwkf"
+            android:layout_gravity="center_horizontal"/>
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/image_grid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,5 +50,6 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="@integer/photo_grid_columns" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -25,20 +25,24 @@
         android:layout_width="@dimen/square_size_normal"
         android:layout_height="@dimen/square_size_normal"
         android:background="#990000"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:stateListAnimator="@xml/scale_animation"/>
 
     <ImageView
         android:id="@+id/transition_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/transition_square"
-        android:src="@drawable/ic_launcher"/>
+        android:src="@drawable/ic_launcher"
+        android:clickable="true"
+        android:stateListAnimator="@xml/scale_animation"/>
 
     <ImageView
         android:id="@+id/transition_oval"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_below="@id/transition_image"
-        android:src="@drawable/oval"/>
+        android:src="@drawable/oval"
+        android:stateListAnimator="@xml/scale_animation"/>
 
 </RelativeLayout>

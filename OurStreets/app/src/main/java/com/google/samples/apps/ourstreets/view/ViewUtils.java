@@ -120,6 +120,18 @@ public class ViewUtils {
     }
 
     /**
+     * Get the center of a given view.
+     *
+     * @param view The view to get coordinates from.
+     * @return The center of the given view.
+     */
+    public static Point getCenterForView(@NonNull View view) {
+        final int centerX = (view.getLeft() + view.getRight()) / 2;
+        final int centerY = (view.getTop() + view.getBottom()) / 2;
+        return new Point(centerX, centerY);
+    }
+
+    /**
      * Create a simple circular reveal for a given view id within a root view.
      * This reveal will start from the start view's boundaries until it fills the root layout.
      *
@@ -175,20 +187,32 @@ public class ViewUtils {
      * Basically a reverse {@link #createCircularReveal(Point, int, View, Interpolator)}.
      *
      * @param center The center x and y coordinates of the final circle.
-     * @param width The final width of the view's coordinates.
+     * @param endRadius The final width of the view's coordinates.
      * @param startView The view which will initially displayed.
      * @param interpolator The interpolator to use.
      * @return The created circular conceal.
      */
-    public static Animator createCircularConceal(@NonNull Point center, int width,
+    public static Animator createCircularConceal(@NonNull Point center, int endRadius,
                                                  @NonNull View startView,
                                                  @NonNull Interpolator interpolator) {
         final Animator circularReveal = ViewAnimationUtils.createCircularReveal(startView,
-                center.x, center.y, (float) Math.hypot(center.x, center.y), width);
+                center.x, center.y, (float) Math.hypot(center.x, center.y), endRadius);
         circularReveal.setInterpolator(interpolator);
         return circularReveal;
     }
-
+    /**
+     * Basically a reverse {@link #createCircularReveal(Point, int, View, Interpolator)}.
+     *
+     * @param endRadius The final width of the view's coordinates.
+     * @param startView The view which will initially displayed.
+     * @param interpolator The interpolator to use.
+     * @return The created circular conceal.
+     */
+    public static Animator createCircularConceal(int endRadius,
+                                                 @NonNull View startView,
+                                                 @NonNull Interpolator interpolator) {
+        return createCircularReveal( getCenterForView(startView), endRadius, startView, interpolator);
+    }
     /**
      * Create a color change animation over a foreground property of a {@link FrameLayout}.
      *
@@ -213,18 +237,6 @@ public class ViewUtils {
         colorChange.setDuration(context.getResources()
                 .getInteger(android.R.integer.config_longAnimTime));
         return colorChange;
-    }
-
-    /**
-     * Get the center of a given view.
-     *
-     * @param view The view to get coordinates from.
-     * @return The center of the given view.
-     */
-    public static Point getCenterForView(@NonNull View view) {
-        final int centerX = (view.getLeft() + view.getRight()) / 2;
-        final int centerY = (view.getTop() + view.getBottom()) / 2;
-        return new Point(centerX, centerY);
     }
 
     /**

@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -43,13 +45,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.grid);
 
+
+//        postponeEnterTransition();
         // Setup the GridView and set the adapter
         GridView grid = findViewById(R.id.grid);
         grid.setOnItemClickListener(mOnItemClickListener);
         GridAdapter adapter = new GridAdapter();
         grid.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+        postponeEnterTransition();
+        findViewById(R.id.grid).getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                findViewById(R.id.grid).getViewTreeObserver().removeOnPreDrawListener(this);
+                startPostponedEnterTransition();
+                return false;
+            }
+        });
     }
 
     private final AdapterView.OnItemClickListener mOnItemClickListener
@@ -74,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
              * method.
              */
             @SuppressWarnings("unchecked")
-            ActivityOptionsCompat.makeSceneTransitionAnimation
             ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     MainActivity.this,
 
