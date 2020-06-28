@@ -1,12 +1,15 @@
-include ':CustomTransition', ':ActivitySceneTransitionBasic', ':BasicTransition'
+include ':BasicTransition2', ':BasicTransition1'
 
-project(':CustomTransition').projectDir = new File('CustomTransition/Application')
-project(':ActivitySceneTransitionBasic').projectDir = new File('ActivitySceneTransitionBasic/app')
-project(':BasicTransition').projectDir = new File('BasicTransition/Application')
+project(':BasicTransition2').projectDir = new File('CustomTransition/Application')
+project(':BasicTransition1').projectDir = new File('BasicTransition/Application')
 
 include ':DrawableAnimations'
 project(':DrawableAnimations').projectDir = new File('DrawableAnimations/app')
 
-include ':Motion', ':Unsplash'
-project(':Motion').projectDir = new File('Motion/app')
-project(':Unsplash').projectDir = new File('Unsplash/app')
+include ':ActivitySceneTransitionBasic2', ':ActivitySceneTransitionBasic'
+project(':ActivitySceneTransitionBasic2').projectDir = new File('Unsplash/app')
+project(':ActivitySceneTransitionBasic').projectDir = new File('ActivitySceneTransitionBasic/app')
+
+include ':Motion1', ':Motion2'
+project(':Motion1').projectDir = new File('Motion/app')
+project(':Motion2').projectDir = new File('ConstraintExample/motionlayout')

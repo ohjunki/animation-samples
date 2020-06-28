@@ -16,7 +16,7 @@
 
 <resources>
 
-    <string name="app_name">ActivitySceneTransitionBasic</string>
+    <string name="app_name">ActivityTransition1</string>
     <string name="intro_message">
         <![CDATA[
 
