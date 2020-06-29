@@ -30,6 +30,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.dynamicanimation.animation.DynamicAnimation;
+import androidx.dynamicanimation.animation.FlingAnimation;
+import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.Fragment;
 
 public class CustomTransitionFragment extends Fragment implements View.OnClickListener {
@@ -59,6 +62,11 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
         if (null != savedInstanceState) {
             mCurrentScene = savedInstanceState.getInt(STATE_CURRENT_SCENE);
         }
+
+        View v = view.findViewById(R.id.view_1);
+        SpringAnimation springAnimation = new SpringAnimation(v, DynamicAnimation.TRANSLATION_Y,0);
+        springAnimation.start();
+        FlingAnimation fling = new FlingAnimation(view, DynamicAnimation.SCROLL_X);
 
         // We set up the Scenes here.
         mScenes = new Scene[] {
