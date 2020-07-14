@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExample2Activity
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExampleActivity
-import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity
+import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentViewPager2ExampleActivity
 import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity2
 import com.google.androidstudio.motionlayoutexample.youtubedemo.YouTubeDemoActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
      * 위의 링크에 필요 내용을 정리했습니다.
      */
     private val dataset: Array<DemosAdapter.Demo> = arrayOf(
+        DemosAdapter.Demo("Fragment ViewPager2 Example", "ViewPager 예시 돌려보는 중", FragmentViewPager2ExampleActivity::class.java),
+
         DemosAdapter.Demo("YouTube like motion Example", "Example showing a transition like YouTube", YouTubeDemoActivity::class.java),
         DemosAdapter.Demo("Example using KeyTrigger", "Example that calls a method using KeyTrigger", R.layout.motion_25_keytrigger),
         DemosAdapter.Demo("Example using Multi State", "Example that transitions between multiple states", R.layout.motion_26_multistate),
