@@ -1,3 +1,4 @@
+include ':libAndroidUtils'
 include ':BasicTransition2', ':BasicTransition1'
 
 project(':BasicTransition2').projectDir = new File('CustomTransition/Application')

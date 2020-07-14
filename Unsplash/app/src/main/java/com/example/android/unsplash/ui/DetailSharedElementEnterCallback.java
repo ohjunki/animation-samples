@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.android.unsplash.DLog;
+import com.ao.libandroidutils.DLog;
 import com.example.android.unsplash.IntentUtil;
 import com.example.android.unsplash.databinding.DetailViewBinding;
 import com.example.android.unsplash.databinding.PhotoItemBinding;

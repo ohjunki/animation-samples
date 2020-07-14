@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.application'
-
 android {
-    compileSdkVersion 29
-
+    compileSdkVersion rootProject.compileSdkVersion
     defaultConfig {
         applicationId 'com.example.android.activityscenetransitionbasic'
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName '1.0'
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

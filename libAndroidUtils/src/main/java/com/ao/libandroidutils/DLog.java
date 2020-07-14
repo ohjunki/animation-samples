@@ -1,8 +1,5 @@
-package com.google.androidstudio.motionlayoutexample.utils;
-
+package com.ao.libandroidutils;
 import android.util.Log;
-
-import com.google.androidstudio.motionlayoutexample.BuildConfig;
 
 /**
  *
@@ -36,7 +33,7 @@ public final class DLog {
     private static final int ASSERT = 7;
 
     public static void v(String tag, String msg) {
-        if (BuildConfig.DEBUG) Log.v(tag, msg);
+        if (AndroidUtilLibrary.DEBUG) Log.v(tag, msg);
     }
 
     public static void vv() {
@@ -52,7 +49,7 @@ public final class DLog {
     }
 
     public static void d(String tag, String msg) {
-        if (BuildConfig.DEBUG) Log.d(tag, msg);
+        if (AndroidUtilLibrary.DEBUG) Log.d(tag, msg);
     }
 
     public static void dd() {
@@ -68,7 +65,7 @@ public final class DLog {
     }
 
     public static void i(String tag, String msg) {
-        if (BuildConfig.DEBUG) Log.i(tag, msg);
+        if (AndroidUtilLibrary.DEBUG) Log.i(tag, msg);
     }
 
     public static void ii() {
@@ -84,7 +81,7 @@ public final class DLog {
     }
 
     public static void w(String tag, String msg) {
-        if (BuildConfig.DEBUG) Log.w(tag, msg);
+        if (AndroidUtilLibrary.DEBUG) Log.w(tag, msg);
     }
 
     public static void ww() {
@@ -100,7 +97,7 @@ public final class DLog {
     }
 
     public static void e(String tag, String msg) {
-        if (BuildConfig.DEBUG) Log.e(tag, msg);
+        if (AndroidUtilLibrary.DEBUG) Log.e(tag, msg);
     }
 
     public static void ee() {
@@ -116,7 +113,7 @@ public final class DLog {
     }
 
     private static void log(int priority, String msg) {
-        if (BuildConfig.DEBUG) {
+        if (AndroidUtilLibrary.DEBUG) {
             StringBuilder msgBuilder = new StringBuilder();
             msgBuilder.append("[").append(Thread.currentThread().getStackTrace()[4].getMethodName()).append("()").append("]").append(" :")
                     .append(" [").append(msg).append("]")
@@ -131,7 +128,7 @@ public final class DLog {
     }
 
     private static void log(int priority, String tag, String msg) {
-        if (BuildConfig.DEBUG) {
+        if (AndroidUtilLibrary.DEBUG) {
             StringBuilder msgBuilder = new StringBuilder();
             msgBuilder.append("[").append(Thread.currentThread().getStackTrace()[4].getFileName().replace(".java", "").replace(".kt", ""))
                     .append(" :: ").append(Thread.currentThread().getStackTrace()[4].getMethodName()).append("()").append("]").append(" :")

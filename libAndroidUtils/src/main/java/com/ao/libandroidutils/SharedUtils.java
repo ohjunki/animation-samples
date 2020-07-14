@@ -1,16 +1,14 @@
-package com.google.androidstudio.motionlayoutexample.utils;
+package com.ao.libandroidutils;
 
 import android.animation.Animator;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;

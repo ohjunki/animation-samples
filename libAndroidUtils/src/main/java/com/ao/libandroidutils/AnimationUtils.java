@@ -1,4 +1,4 @@
-package com.example.android.unsplash;
+package com.ao.libandroidutils;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,7 +15,6 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 

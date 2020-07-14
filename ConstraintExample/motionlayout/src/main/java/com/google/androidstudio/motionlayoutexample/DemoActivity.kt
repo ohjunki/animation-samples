@@ -29,9 +29,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.ao.libandroidutils.DLog
+import com.ao.libandroidutils.SharedUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.androidstudio.motionlayoutexample.utils.DLog
-import com.google.androidstudio.motionlayoutexample.utils.SharedUtils
 import kotlinx.android.synthetic.main.main_activity.view.*
 
 
