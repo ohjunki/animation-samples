@@ -14,3 +14,9 @@ project(':ActivitySceneTransitionBasic').projectDir = new File('ActivitySceneTra
 include ':Motion1', ':Motion2'
 project(':Motion1').projectDir = new File('Motion/app')
 project(':Motion2').projectDir = new File('ConstraintExample/motionlayout')
+
+include ':FragmentShare'
+project(':FragmentShare').projectDir = new File('OurStreets/app')
+
+include ':AnimatedStateListDrawable'
+project(':AnimatedStateListDrawable').projectDir = new File('AnimatedStateListDrawable/app')

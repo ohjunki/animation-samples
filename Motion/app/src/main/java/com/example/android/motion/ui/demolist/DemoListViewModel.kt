@@ -27,6 +27,9 @@ import com.example.android.motion.model.Demo
 
 class DemoListViewModel(application: Application) : AndroidViewModel(application) {
 
+    /***
+     * 이중으로 LiveData를 감싸서 외부에서는 demos의 데이터를 수정하지 못하도록 막는다.
+     */
     private val _demos = MutableLiveData<List<Demo>>()
     val demos: LiveData<List<Demo>> = _demos
 
@@ -36,6 +39,29 @@ class DemoListViewModel(application: Application) : AndroidViewModel(application
             Intent(Intent.ACTION_MAIN).addCategory(Demo.CATEGORY),
             PackageManager.GET_META_DATA
         )
+
+        /**
+         * Manifest에 Activity를 정의할때 Category를 지정할 수 있고 아래는 특정 카테고리의 activity 리스트를 받아온다.
+         * 리스트를 받아서 Intent를 생성할 수 있는 Demo Class로 매핑을 해준다.
+         * 추가 메타데이터로 Description, Apis를 생성하여 표시하고 있다.
+
+        <activity
+            android:name=".demo.reorder.ReorderActivity"
+            android:label="@string/reorder_label">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.example.android.motion.intent.category.DEMO" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.example.android.motion.demo.DESCRIPTION"
+                android:value="@string/reorder_description" />
+            <meta-data
+                android:name="com.example.android.motion.demo.APIS"
+                android:resource="@array/reorder_apis" />
+        </activity>
+
+         */
         val resources = application.resources
         _demos.value = resolveInfoList.map { resolveInfo ->
             val activityInfo = resolveInfo.activityInfo

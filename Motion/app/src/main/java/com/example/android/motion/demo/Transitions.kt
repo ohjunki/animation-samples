@@ -33,6 +33,15 @@ import androidx.transition.TransitionSet
  * See
  * [Expressing continuity](https://material.io/design/motion/understanding-motion.html#expressing-continuity)
  * for the detail of fade through.
+ * 예시
+    val fadeThrough = fadeThrough()
+    toggle.setOnClickListener {
+        TransitionManager.beginDelayedTransition(
+            targetViewGroup,
+            fadeThrough.setDuration(250)
+        )
+        targetView.isVisible = true
+    }
  */
 fun fadeThrough(): Transition {
     return transitionTogether {

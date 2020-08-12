@@ -70,6 +70,17 @@
         android:visibility="invisible"
         app:layout_behavior="@string/fab_transformation_scrim_behavior" />
 
+    <!--
+        FloatingBtn의 Behavior가 아래처럼 미리 정해져 있어서
+        layout_behavior만 추가해두면 알아서 미리 정해진 behavior에 따라 동작한다.
+    -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00FF00"
+        android:visibility="invisible"
+        app:layout_behavior="@string/fab_transformation_scrim_behavior" />
+
     <!-- A FAB that expands into a sheet. -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

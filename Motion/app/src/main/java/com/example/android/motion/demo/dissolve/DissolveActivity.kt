@@ -29,6 +29,10 @@ import com.example.android.motion.ui.EdgeToEdge
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
+/**
+ * Dissolve라는 Custom Transition을 만들고
+ * @see TransitionManager.beginDelayedTransition 을 활용하여 특정 view의 애니메이션을 추가함
+ */
 class DissolveActivity : AppCompatActivity() {
 
     private val viewModel: DissolveViewModel by viewModels()
@@ -49,8 +53,9 @@ class DissolveActivity : AppCompatActivity() {
 
         // This is the transition we use for dissolve effect of the image view.
         val dissolve = Dissolve().apply {
+
             addTarget(image)
-            duration = 200L
+            duration = 600L
             interpolator = FAST_OUT_SLOW_IN
         }
         viewModel.image.observe(this) { resId ->

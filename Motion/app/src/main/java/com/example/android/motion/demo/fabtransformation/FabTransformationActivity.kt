@@ -16,6 +16,7 @@
 
 package com.example.android.motion.demo.fabtransformation
 
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -33,8 +34,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.android.motion.R
 import com.example.android.motion.ui.EdgeToEdge
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.transformation.FabTransformationSheetBehavior
 
 /**
  * FAB transformation is provided by Material Components. This activity demonstrates how to use
@@ -69,7 +72,7 @@ class FabTransformationActivity : AppCompatActivity() {
         setContentView(R.layout.fab_transformation_activity)
         val root: CoordinatorLayout = findViewById(R.id.root)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        val sheet: CircularRevealCardView = findViewById(R.id.sheet)
+        val sheet: MaterialCardView = findViewById(R.id.sheet)
         val scrim: View = findViewById(R.id.scrim)
         val cheeseHolders: List<CheeseItemHolder> = listOf(
             CheeseItemHolder(findViewById(R.id.cheese_1), cheeseOnClick),
@@ -80,24 +83,24 @@ class FabTransformationActivity : AppCompatActivity() {
         message = findViewById(R.id.message)
         fab = findViewById(R.id.fab)
         setSupportActionBar(toolbar)
-
-        // Set up edge-to-edge display.
-        EdgeToEdge.setUpRoot(root)
-        EdgeToEdge.setUpAppBar(findViewById(R.id.app_bar), toolbar)
-        val fabMargin = resources.getDimensionPixelSize(R.dimen.spacing_medium)
-        ViewCompat.setOnApplyWindowInsetsListener(root) { _, insets ->
-            fab.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-                leftMargin = fabMargin + insets.systemWindowInsetLeft
-                rightMargin = fabMargin + insets.systemWindowInsetRight
-                bottomMargin = fabMargin + insets.systemWindowInsetBottom
-            }
-            sheet.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-                leftMargin = fabMargin + insets.systemWindowInsetLeft
-                rightMargin = fabMargin + insets.systemWindowInsetRight
-                bottomMargin = fabMargin + insets.systemWindowInsetBottom
-            }
-            insets
-        }
+//
+//        // Set up edge-to-edge display.
+//        EdgeToEdge.setUpRoot(root)
+//        EdgeToEdge.setUpAppBar(findViewById(R.id.app_bar), toolbar)
+//        val fabMargin = resources.getDimensionPixelSize(R.dimen.spacing_medium)
+//        ViewCompat.setOnApplyWindowInsetsListener(root) { _, insets ->
+//            fab.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+//                leftMargin = fabMargin + insets.systemWindowInsetLeft
+//                rightMargin = fabMargin + insets.systemWindowInsetRight
+//                bottomMargin = fabMargin + insets.systemWindowInsetBottom
+//            }
+//            sheet.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+//                leftMargin = fabMargin + insets.systemWindowInsetLeft
+//                rightMargin = fabMargin + insets.systemWindowInsetRight
+//                bottomMargin = fabMargin + insets.systemWindowInsetBottom
+//            }
+//            insets
+//        }
 
         // Populate the sheet content.
         viewModel.cheeses.observe(this) { cheeses ->

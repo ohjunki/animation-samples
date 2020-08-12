@@ -66,6 +66,10 @@ class Dissolve : Transition() {
         }
     }
 
+    /**
+     * overlay 속성을 활용하여
+     * View의 사라질 View를 alpha를 주면서 사라지게 하는 애니메이션 구현
+     */
     override fun createAnimator(
         sceneRoot: ViewGroup,
         startValues: TransitionValues?,

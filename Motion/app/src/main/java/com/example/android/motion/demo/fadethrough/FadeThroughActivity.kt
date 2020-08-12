@@ -18,6 +18,8 @@ package com.example.android.motion.demo.fadethrough
 
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +35,11 @@ import com.example.android.motion.ui.EdgeToEdge
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
+/**
+ * @View.isVisible View의 Visibility를 true,false로 조정하는 변수... Visible / Gone
+ * TransitionManager.beginDelayedTransition는 기본적으로 Layout의 변화와 FadeIn효과를 준다.
+ * 여기에 fadeThrough()를 추가로 주어서 fadeOut효과도 같이 준다!
+ */
 class FadeThroughActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +50,10 @@ class FadeThroughActivity : AppCompatActivity() {
         val card: MaterialCardView = findViewById(R.id.card)
         val contact: ConstraintLayout = findViewById(R.id.card_contact)
         val cheese: ConstraintLayout = findViewById(R.id.card_cheese)
+        val root1: RelativeLayout = findViewById(R.id.root1)
+        val root2: MaterialCardView = findViewById(R.id.root2)
+        val test1: LinearLayout = findViewById(R.id.test1)
+        val test2: LinearLayout = findViewById(R.id.test2)
         val toggle: MaterialButton = findViewById(R.id.toggle)
         val icon: ImageView = findViewById(R.id.contact_icon)
 
@@ -58,21 +69,21 @@ class FadeThroughActivity : AppCompatActivity() {
 
         toggle.setOnClickListener {
             // We are only toggling the visibilities of the card contents here.
-            if (contact.isVisible) {
+            if (test1.isVisible) {
                 // Delays the fade-through transition until the layout change below takes effect.
                 TransitionManager.beginDelayedTransition(
-                    card,
+                    root2,
                     fadeThrough.setDuration(MEDIUM_EXPAND_DURATION)
                 )
-                contact.isVisible = false
-                cheese.isVisible = true
+                test1.isVisible = false
+                test2.isVisible = true
             } else {
                 TransitionManager.beginDelayedTransition(
-                    card,
+                    root2,
                     fadeThrough.setDuration(MEDIUM_COLLAPSE_DURATION)
                 )
-                contact.isVisible = true
-                cheese.isVisible = false
+                test1.isVisible = true
+                test2.isVisible = false
             }
         }
     }
