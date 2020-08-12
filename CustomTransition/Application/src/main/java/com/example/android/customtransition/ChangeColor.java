@@ -17,9 +17,7 @@
 package com.example.android.customtransition;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
-import android.animation.IntEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
@@ -33,15 +31,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 
-import com.example.android.common.logger.Log;
-
 public class ChangeColor extends Transition {
 
     /** Key to store a color value in TransitionValues object */
     private static final String PROPNAME_BACKGROUND = "customtransition:change_color:background";
-    private static final String PROPNAME_WIDTH = "customtransition:change_color:width";
-    private static final String PROPNAME_HEIGHT = "customtransition:change_color:height";
-    private static final String PROPNAME_X = "customtransition:change_color:x";
 
     // BEGIN_INCLUDE (capture_values)
     /**
@@ -51,9 +44,6 @@ public class ChangeColor extends Transition {
     private void captureValues(TransitionValues values) {
         // Capture the property values of views for later use
         values.values.put(PROPNAME_BACKGROUND, values.view.getBackground());
-        values.values.put(PROPNAME_WIDTH, values.view.getWidth());
-        values.values.put(PROPNAME_HEIGHT, values.view.getHeight());
-        values.values.put(PROPNAME_X, values.view.getX());
     }
 
     @Override
@@ -88,12 +78,6 @@ public class ChangeColor extends Transition {
         // layouts.
         Drawable startBackground = (Drawable) startValues.values.get(PROPNAME_BACKGROUND);
         Drawable endBackground = (Drawable) endValues.values.get(PROPNAME_BACKGROUND);
-        int sWidth = (int) startValues.values.get(PROPNAME_WIDTH);
-        int sHeidth = (int) startValues.values.get(PROPNAME_HEIGHT);
-        int eWidth = (int) endValues.values.get(PROPNAME_WIDTH);
-        int eHeidth = (int) endValues.values.get(PROPNAME_HEIGHT);
-        float sX = (float) startValues.values.get(PROPNAME_X);
-        float eX = (float) endValues.values.get(PROPNAME_X);
         // This transition changes background colors for a target. It doesn't animate any other
         // background changes. If the property isn't a ColorDrawable, ignore the target.
         if (startBackground instanceof ColorDrawable && endBackground instanceof ColorDrawable) {
@@ -108,21 +92,6 @@ public class ChangeColor extends Transition {
                 // animation runs on the UI thread. The Evaluator controls what type of
                 // interpolation is done. In this case, an ArgbEvaluator interpolates between two
                 // #argb values, which are specified as the 2nd and 3rd input arguments.
-                ValueAnimator wAnimation = ValueAnimator.ofInt( sWidth, eWidth );
-                ValueAnimator hAnimation = ValueAnimator.ofInt( sHeidth, eHeidth );
-                wAnimation.addUpdateListener( (ani)->{
-                    if( ani.getAnimatedValue() != null ){
-                        view.getLayoutParams().width = (int) ani.getAnimatedValue();
-                        view.requestLayout();
-                    }
-                });
-                hAnimation.addUpdateListener( (ani)->{
-                    if( ani.getAnimatedValue() != null ){
-                        view.getLayoutParams().height = (int) ani.getAnimatedValue();
-                        view.requestLayout();
-                    }
-                });
-
                 ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(),
                         startColor.getColor(), endColor.getColor());
                 // Add an update listener to the Animator object.
@@ -133,18 +102,10 @@ public class ChangeColor extends Transition {
                         // Each time the ValueAnimator produces a new frame in the animation, change
                         // the background color of the target. Ensure that the value isn't null.
                         if (null != value) {
-//                            view.setTranslationX( (sX-eX)* animation.getAnimatedFraction() );
-//                            view.setScaleX( (sWidth/(float)eWidth) -  ( sWidth/(float)eWidth -1 ) * animation.getAnimatedFraction());
-//                            view.setScaleY( (sHeidth/(float)eHeidth) -  ( sHeidth/(float)eHeidth -1 ) * animation.getAnimatedFraction());
-                            Log.e("@@ANi", "fraction="+animation.getAnimatedFraction() );
-                            Log.e("@@ANi", "fraction="+animation.getCurrentPlayTime() );
                             view.setBackgroundColor((Integer) value);
                         }
                     }
                 });
-
-                AnimatorSet set = new AnimatorSet();
-                set.play(animator).with(wAnimation).with(hAnimation);
                 // Return the Animator object to the transitions framework. As the framework changes
                 // between the starting and ending layouts, it applies the animation you've created.
                 return animator;

@@ -86,9 +86,13 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
         TransitionSet set = new TransitionSet();
         set.addTransition(new ChangeColor());
         set.addTransition(new AutoTransition());
+        set.addTransition(new RotateTransition());
+        set.setDuration(5000);
 
-        set.excludeTarget( R.id.view_1, true);
-//        set.removeTarget( R.id.view_2);
+        set.excludeTarget( R.id.container, true);
+        set.addTarget( R.id.view_1 );
+        set.addTarget( R.id.view_2 );
+        set.addTarget( R.id.view_3 );
 //        set.removeTarget( R.id.view_3);
         mTransition = set;
         return view;
